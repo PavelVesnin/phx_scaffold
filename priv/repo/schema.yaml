@@ -1,0 +1,17 @@
+Json:
+  context: User
+  model: Account
+  table: accounts
+  fields:
+    - name:string
+    - title:decimal
+    - profile_id:references:profiles
+
+Json:
+  context: User
+  model: Profile
+  table: profiles
+  fields:
+    - name:string
+    - title:array
+    - account_id:references:accounts
