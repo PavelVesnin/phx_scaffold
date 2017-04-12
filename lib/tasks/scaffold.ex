@@ -23,10 +23,18 @@ defmodule Mix.Tasks.Scaffold do
   def process_task({task, args}) do
     Mix.Tasks.Phx.Gen
     |> Module.concat(task)
-    |> apply(:run, [prepare_args(args)])
+    |> apply(:run, [prepare_args(task, args)])
   end
 
-  def prepare_args(args) do
+  def prepare_args("Schema", args) do
+    [
+      fetch_value!(args, :model),
+      fetch_value!(args, :table)
+    ] ++ Keyword.fetch!(args, :fields)
+  end
+
+  def prepare_args(t, args) do
+    IO.inspect(t)
     [
       fetch_value!(args, :context),
       fetch_value!(args, :model),
