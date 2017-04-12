@@ -65,6 +65,68 @@ Json:
     - emails:string
 
 Json:
+  context: Staff
+  model: Employee
+  table: employees
+  fields:
+    - position:string
+    - status:string
+    - employee_type:string
+    - active:boolean
+    - created_by:string
+    - updated_by:string
+    - start_date:datetime
+    - end_date:datetime
+    - legal_entity_id:references:legal_entities
+    - division_id:references:divisions
+    - party_id:references:party_id
+    - employee_doctor_id:references:employee_doctors
+
+Json:
+  context: Staff
+  model: EmployeeDoctor
+  table: employee_doctors
+  fields:
+    - education:array
+    - qualification:array
+    - specialities:array
+    - science_degree:array
+    - employee_id:references:employee
+
+Json:
+  context: Staff
+  model: Party
+  table: parties
+  fields:
+    - first_name:string
+    - second_name:string
+    - last_name:string
+    - birth_date:date
+    - gender:integer
+    - tax_id:string
+    - national_id:string
+    - documents:array
+    - phones:array
+    - created_by:string
+    - updated_by:string
+    - employee_id:references:employee
+    - doctor_id:references:doctors
+
+Json:
+  context: Staff
+  model: Doctor
+  table: doctors
+  fields:
+    - education:array
+    - qualification:array
+    - speciality:string
+    - professional_level:array
+    - science_degree:array
+    - academic_degree:array
+    - specialization:array
+    - party_id:references:parties
+
+Json:
   context: Log
   model: LogChanges
   table: changes
