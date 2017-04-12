@@ -1,17 +1,74 @@
 Json:
-  context: User
-  model: Account
-  table: accounts
+  context: Entity
+  model: LegalEntity
+  table: legal_entities
   fields:
     - name:string
-    - title:decimal
-    - profile_id:references:profiles
+    - short_name:string
+    - public_name:string
+    - status:string
+    - type:string
+    - owner_property_type:string
+    - legal_form:string
+    - edrpou:integer
+    - kveds:array
+    - addresses:array
+    - phones:array
+    - emails:array
+    - active:boolean
+    - created_by:string
+    - updated_by:string
+    - msp_id:references:msps
 
 Json:
-  context: User
-  model: Profile
-  table: profiles
+  context: Entity
+  model: MSP
+  table: msps
+  fields:
+    - accreditation:array
+    - license:array
+    - legal_entity:references:legal_entities
+
+Json:
+  context: Entity
+  model: Product
+  table: products
   fields:
     - name:string
-    - title:array
-    - account_id:references:accounts
+    - parameters:map
+
+Json:
+  context: Entity
+  model: CapitationContract
+  table: capitation_contracts
+  fields:
+    - msp_id:string
+    - status:string
+    - services:map
+    - start_date:datetime
+    - end_date:datetime
+    - signed_at:datetime
+    - product_id:references:products
+
+Json:
+  context: Entity
+  model: Division
+  table: divisions
+  fields:
+    - msp_id:references:msps
+    - external_id:string
+    - name:string
+    - type:string
+    - mountain_group:string
+    - address:array
+    - phones:array
+    - emails:string
+
+Json:
+  context: Log
+  model: LogChanges
+  table: changes
+  fields:
+    - user_id:string
+    - resource:string
+    - what_changed:map
