@@ -1,5 +1,5 @@
 Json:
-  context: Entity
+  context: Entities
   model: LegalEntity
   table: legal_entities
   fields:
@@ -10,27 +10,42 @@ Json:
     - type:string
     - owner_property_type:string
     - legal_form:string
-    - edrpou:integer
-    - kveds:array
-    - addresses:array
-    - phones:array
-    - emails:array
+    - edrpou:string
+    - kveds:map
+    - addresses:map
+    - phones:map
+    - email:string
     - active:boolean
     - created_by:string
     - updated_by:string
-    - msp_id:references:msps
+    - msp_id:references:medical_service_providers
+    - capitation_contract_id:references:medical_service_providers
 
 Json:
-  context: Entity
+  context: Entities
   model: MSP
-  table: msps
+  table: medical_service_providers
   fields:
-    - accreditation:array
-    - license:array
-    - legal_entity:references:legal_entities
+    - accreditation:map
+    - license:map
+    - legal_entity_id:references:legal_entities
 
 Json:
-  context: Entity
+  context: Entities
+  model: Division
+  table: divisions
+  fields:
+    - external_id:string
+    - name:string
+    - type:string
+    - mountain_group:string
+    - address:map
+    - phones:map
+    - email:string
+    - legal_entity_id:references:legal_entities
+
+Json:
+  context: Contracts
   model: Product
   table: products
   fields:
@@ -38,7 +53,7 @@ Json:
     - parameters:map
 
 Json:
-  context: Entity
+  context: Contracts
   model: CapitationContract
   table: capitation_contracts
   fields:
@@ -51,21 +66,7 @@ Json:
     - product_id:references:products
 
 Json:
-  context: Entity
-  model: Division
-  table: divisions
-  fields:
-    - msp_id:references:msps
-    - external_id:string
-    - name:string
-    - type:string
-    - mountain_group:string
-    - address:array
-    - phones:array
-    - emails:string
-
-Json:
-  context: Staff
+  context: Employees
   model: Employee
   table: employees
   fields:
@@ -83,18 +84,18 @@ Json:
     - employee_doctor_id:references:employee_doctors
 
 Json:
-  context: Staff
+  context: Employees
   model: EmployeeDoctor
   table: employee_doctors
   fields:
-    - education:array
-    - qualification:array
-    - specialities:array
-    - science_degree:array
+    - education:map
+    - qualification:map
+    - specialities:map
+    - science_degree:map
     - employee_id:references:employee
 
 Json:
-  context: Staff
+  context: Parties
   model: Party
   table: parties
   fields:
@@ -105,29 +106,15 @@ Json:
     - gender:integer
     - tax_id:string
     - national_id:string
-    - documents:array
-    - phones:array
+    - documents:map
+    - phones:map
     - created_by:string
     - updated_by:string
     - employee_id:references:employee
     - doctor_id:references:doctors
 
 Json:
-  context: Staff
-  model: Doctor
-  table: doctors
-  fields:
-    - education:array
-    - qualification:array
-    - speciality:string
-    - professional_level:array
-    - science_degree:array
-    - academic_degree:array
-    - specialization:array
-    - party_id:references:parties
-
-Json:
-  context: Log
+  context: Logs
   model: LogChanges
   table: changes
   fields:
