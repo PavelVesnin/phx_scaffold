@@ -121,3 +121,13 @@ Json:
     - user_id:string
     - resource:string
     - what_changed:map
+
+Json:
+  context: Registries
+  model: UkrMed
+  table: ukr_med_registries
+  fields:
+    - name:string
+    - edrpou:string
+    - created_by:uuid
+    - updated_by:uuid
